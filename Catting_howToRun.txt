@@ -1,0 +1,5 @@
+cd /cygdrive/c/Users/belli/Desktop/younnii/25-2/25-2 system
+
+gcc struct2.c server2.c -o server -pthread
+
+gcc client2.c -o client -pthread
