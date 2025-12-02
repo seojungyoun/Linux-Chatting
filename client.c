@@ -150,12 +150,12 @@ void *recv_thread(void *arg) {
             fflush(stdout);
             continue;
         }
-        if (strncmp(buf, "ERR_FRD_ADD_FAIL", 17) == 0) {
+        if (strncmp(buf, "ERR_FRD_ADD_FAIL", 16) == 0) {
             printf("\n[SYSTEM] 친구추가 실패 (이미 존재하거나 오류)\n");
             fflush(stdout);
             continue;
         }
-        if (strncmp(buf, "ACK_FRD_SEARCH_OK", 17) == 0) {
+        if (strncmp(buf, "ACK_FRD_SEARCH_OK", 16) == 0) {
             char name[64];
             char *info = strchr(tmp, '|');
             if (info && sscanf(info+1, "%63s exists", name) == 1)
@@ -163,7 +163,7 @@ void *recv_thread(void *arg) {
             fflush(stdout);
             continue;
         }
-        if (strncmp(buf, "ERR_FRD_SEARCH_FAIL", 20) == 0) {
+        if (strncmp(buf, "ERR_FRD_SEARCH_FAIL", 19) == 0) {
             printf("\n[SYSTEM] 해당 사용자를 찾을 수 없습니다.\n");
             fflush(stdout);
             continue;
