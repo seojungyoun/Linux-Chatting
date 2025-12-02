@@ -16,6 +16,16 @@ char p2p_with[64] = "";
 char incoming_p2p_request[128] = "";
 pthread_mutex_t request_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+void trim_newline(char *s) {
+    s[strcspn(s, "\n")] = 0;
+    s[strcspn(s, "\r")] = 0;
+}
+
+void clear_stdin_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 void *recv_thread(void *arg) {
     char buf[BUF_SIZE];
 
@@ -195,7 +205,7 @@ int main() {
     // serv 구조체 초기화
     serv.sin_family = AF_INET;
     serv.sin_port = htons(5555);
-    serv.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serv.sin_addr.s_addr = inet_addr("124.56.5.77");
 
     // 초기 연결
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -216,16 +226,6 @@ int main() {
     char id[64], pw[64];
     char buf[BUF_SIZE];
     char target[64], message[256];
-
-    auto void trim_newline(char *s) {
-        s[strcspn(s, "\n")] = 0;
-        s[strcspn(s, "\r")] = 0;
-    }
-
-    auto void clear_stdin_buffer() {
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-    }
     
     while (mode == 0) { // 로그인 메뉴 (mode 0)
         if (sockfd == -1) {
